@@ -1,0 +1,15 @@
+{
+  "apps": [
+    {
+      "name": "planted-mms",
+      "script": "app.js",
+      "instances": 1,
+      "autorestart": true,
+      "watch": false,
+      "env": {
+        "NODE_ENV": "testing"
+      }
+    }
+  ]
+}
+
