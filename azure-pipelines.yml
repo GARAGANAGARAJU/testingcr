@@ -29,14 +29,6 @@ steps:
       npm install
     displayName: 'Install Node.js Dependencies'
 
-  # Optional Step 3: Run Build Command
-  # Skip this step if there is no build process
-  # Uncomment if you add a build process to the application in the future
-  # - script: |
-  #     npm run build
-  #   displayName: 'Build Application'
-  #   condition: succeeded()  # Only run if the previous steps succeeded
-
   # Authenticate with Azure DevOps using the PAT token
   - script: |
       echo $(naga-pat) | az devops login --organization https://dev.azure.com/CloudBuildersTech/
@@ -54,4 +46,5 @@ steps:
         --feed testing-credo \
         --name my-first-package \
         --version $(version) \
-
+        --path $(Build.ArtifactStagingDirectory)  # Added the path argument
+    displayName: 'Package and Publish Artifacts'
