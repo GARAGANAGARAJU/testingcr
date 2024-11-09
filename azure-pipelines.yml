@@ -53,3 +53,5 @@ steps:
         --scope project \
         --feed testing-credo \
         --name my-first-package \
+        --version $(version) \
+
