@@ -1,0 +1,30 @@
+trigger:
+  branches:
+    include:
+      - main  # Adjust to the branch you want to trigger builds on
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '14.x'
+    displayName: 'Install Node.js'
+
+  - script: |
+      npm install
+    displayName: 'Install Node.js Dependencies'
+
+  # Copy files to the artifact staging directory
+  - script: |
+      mkdir -p $(Build.ArtifactStagingDirectory)/app
+      cp -R * $(Build.ArtifactStagingDirectory)/app
+    displayName: 'Copy Files to Artifact Staging Directory'
+
+  # Publish build artifacts
+  - task: PublishBuildArtifacts@1
+    inputs:
+      Pathtopublish: '$(Build.ArtifactStagingDirectory)/app'
+      ArtifactName: 'app'
+    displayName: 'Publish Build Artifacts'
