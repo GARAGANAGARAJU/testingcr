@@ -29,7 +29,7 @@ steps:
       command: 'publish'
       publishDirectory: '$(Pipeline.Workspace)'
       vstsFeedPublish: 'CB-CommonProject/testing-credo'
-      vstsFeedPackagePublish: 'my-first-packag'
+      vstsFeedPackagePublish: 'my-first-package'
       versionOption: 'custom'
       versionPublish: '1.0.$(Build.BuildId)'
       packagePublishDescription: 'Welcome to Universal Packages'
