@@ -28,7 +28,7 @@ steps:
     inputs:
       command: 'publish'
       publishDirectory: '$(Pipeline.Workspace)'
-      vstsFeedPublish: 'testing-credo'
+      vstsFeedPublish: 'CB-CommonProject/testing-credo'
       vstsFeedPackagePublish: 'my-first-package'
       versionOption: 'custom'
       versionPublish: '0.0.1'
