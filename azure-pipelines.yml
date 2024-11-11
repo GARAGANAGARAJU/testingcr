@@ -7,16 +7,6 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-  # Dynamically compute the version
-  - script: |
-      YEAR=$(date +%Y)
-      MONTH=$(date +%m)
-      DAY=$(date +%d)
-      REV=${BUILD_BUILDID}
-      VERSION="1.0.0-$YEAR$MONTH$DAY.$REV"
-      echo "Computed version: $VERSION"
-      echo "##vso[task.setvariable variable=version]$VERSION"
-    displayName: 'Compute Version'
 
   # Step 1: Install Node.js
   - task: NodeTool@0
@@ -34,17 +24,12 @@ steps:
       echo $(naga-pat) | az devops login --organization https://dev.azure.com/CloudBuildersTech/
     displayName: 'Authenticate Azure DevOps CLI'
 
-  # Package and publish artifacts with versioning
-  - script: |
-      mkdir -p $(Build.ArtifactStagingDirectory)
-      # Assuming you have files you want to package, such as build output
-      cp -R * $(Build.ArtifactStagingDirectory)
-      az artifacts universal publish \
-        --organization https://dev.azure.com/CloudBuildersTech/ \
-        --project "CB-CommonProject" \
-        --scope project \
-        --feed testing-credo \
-        --name my-first-package \
-        --version $(version) \
-        --path $(Build.ArtifactStagingDirectory)  # Added the path argument
-    displayName: 'Package and Publish Artifacts'
+  - task: UniversalPackages@0
+    inputs:
+      command: 'publish'
+      publishDirectory: '$(Pipeline.Workspace)'  
+      vstsFeedPublish: 'CB-CommonProject/testing-credo'  
+      vstsFeedPackagePublish: 'my-first-package'  
+      versionOption: 'custom'
+      versionPublish: '1.0.$(Build.BuildId)'  
+      packagePublishDescription: 'local deployment'
