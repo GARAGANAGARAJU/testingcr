@@ -27,9 +27,10 @@ steps:
   - task: UniversalPackages@0
     inputs:
       command: 'publish'
-      publishDirectory: '$(Pipeline.Workspace)'  
-      vstsFeedPublish: 'CB-CommonProject/testing-credo'  
-      vstsFeedPackagePublish: 'my-first-package'  
+      publishDirectory: '$(Pipeline.Workspace)'
+      vstsFeedPublish: 'testing-credo'
+      vstsFeedPackagePublish: 'my-first-package'
       versionOption: 'custom'
-      versionPublish: '1.0.$(Build.BuildId)'  
-      packagePublishDescription: 'local deployment'
+      versionPublish: '0.0.1'
+      packagePublishDescription: 'Welcome to Universal Packages'
+
