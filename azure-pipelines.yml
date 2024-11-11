@@ -31,6 +31,6 @@ steps:
       vstsFeedPublish: 'CB-CommonProject/testing-credo'
       vstsFeedPackagePublish: 'my-first-package'
       versionOption: 'custom'
-      versionPublish: '0.0.1'
+      versionPublish: '1.0.$(Build.BuildId)'
       packagePublishDescription: 'Welcome to Universal Packages'
 
