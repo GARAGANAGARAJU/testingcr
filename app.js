@@ -5,7 +5,7 @@ const port = 3000;
 
 // Define a simple health check route
 app.get('/health', (req, res) => {
-  res.status(200).send('Healthy Sudhir');
+  res.status(200).send('Healthy naga');
 });
 
 // Start the application
